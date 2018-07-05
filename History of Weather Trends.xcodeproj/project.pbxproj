@@ -12,6 +12,7 @@
 		4907DEE320E64C260083FCF8 /* Megan June.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4907DEE220E64C0E0083FCF8 /* Megan June.otf */; };
 		4907DEE420E64C290083FCF8 /* BebasNeue-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4907DEE120E64C020083FCF8 /* BebasNeue-Regular.ttf */; };
 		4907DEE620E670A40083FCF8 /* DetailAboutWeatherInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4907DEE520E670A40083FCF8 /* DetailAboutWeatherInfoVC.swift */; };
+		4992EB8920EE580B00C9F555 /* TestC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4992EB8820EE580B00C9F555 /* TestC.swift */; };
 		49B3C08520E3CDD100BD775B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B3C08420E3CDD100BD775B /* AppDelegate.swift */; };
 		49B3C08A20E3CDD100BD775B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49B3C08820E3CDD100BD775B /* Main.storyboard */; };
 		49B3C08C20E3CDD100BD775B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49B3C08B20E3CDD100BD775B /* Assets.xcassets */; };
@@ -26,6 +27,7 @@
 		4907DEE120E64C020083FCF8 /* BebasNeue-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BebasNeue-Regular.ttf"; sourceTree = "<group>"; };
 		4907DEE220E64C0E0083FCF8 /* Megan June.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Megan June.otf"; sourceTree = "<group>"; };
 		4907DEE520E670A40083FCF8 /* DetailAboutWeatherInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailAboutWeatherInfoVC.swift; sourceTree = "<group>"; };
+		4992EB8820EE580B00C9F555 /* TestC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestC.swift; sourceTree = "<group>"; };
 		49B3C08120E3CDD100BD775B /* History of Weather Trends.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "History of Weather Trends.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		49B3C08420E3CDD100BD775B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		49B3C08920E3CDD100BD775B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 				49B3C08D20E3CDD100BD775B /* LaunchScreen.storyboard */,
 				49B3C09020E3CDD100BD775B /* Info.plist */,
 				4907DEE020E64BE40083FCF8 /* Fonts */,
+				4992EB8820EE580B00C9F555 /* TestC.swift */,
 			);
 			path = "History of Weather Trends";
 			sourceTree = "<group>";
@@ -182,6 +185,7 @@
 			files = (
 				4907DEDF20E5321E0083FCF8 /* WeatherInfoCell.swift in Sources */,
 				4907DEE620E670A40083FCF8 /* DetailAboutWeatherInfoVC.swift in Sources */,
+				4992EB8920EE580B00C9F555 /* TestC.swift in Sources */,
 				49F5A3D420EA9543003EC7FF /* SettingsPageVC.swift in Sources */,
 				4907DEDC20E440250083FCF8 /* HistoryTableVC.swift in Sources */,
 				49B3C09820E3CECF00BD775B /* WeatherMeasurementsPerWeek.swift in Sources */,
