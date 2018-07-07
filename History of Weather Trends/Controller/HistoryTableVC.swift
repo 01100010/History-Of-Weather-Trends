@@ -11,188 +11,196 @@ import UIKit
 class HistoryTableVC: UITableViewController {
 
     // MARK: Properties
-    
-    private let stubURL = "https://www.metoffice.gov.uk/pub/data/weather/uk/climate/stationdata/"
-    
+
+    let stubURL = "https://www.metoffice.gov.uk/pub/data/weather/uk/climate/stationdata/"
+
     var searchController = UISearchController(searchResultsController: nil)
-    
-    var currentWeatherStationName = "Bradford"
-    var currentTemperatureScale = TemperatureScale.Celsius
-    
-    var weatherInfoArray = [WeatherMeasurementsPerWeek]()
-    var filteredWeatherInfoArray = [WeatherMeasurementsPerWeek]()
+
+    var currentWeatherStation = "Bradford"
+    var currentTemperatureScale = TemperatureScale.celsius
+
+    var weatherDataByStation = [WeatherMeasurementsPerWeek]()
+    var filteredWeatherData = [WeatherMeasurementsPerWeek]()
     var indexOfData: Int?
-    
+
     // MARK: Override Methods UIViewController
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        LoadData(stationName: currentWeatherStationName)
-        
-        SetupSearchController()
+
+        loadWeatherStationData(station: currentWeatherStation)
+
+        setupSearchController()
     }
-    
+
     // MARK: - Table view data source & delegate
-    
+
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
-        return filteredWeatherInfoArray.count
-    
+        return filteredWeatherData.count
     }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "WeatherInfoCell", for: indexPath) as! WeatherInfoCell
 
-        cell.SetData(data: filteredWeatherInfoArray[indexPath.row])
-        
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "WeatherInfoCell", for: indexPath) as? WeatherInfoCell else {
+            return UITableViewCell()
+        }
+
+        cell.setupWeatherInfoCell(data: filteredWeatherData[indexPath.row])
+
         return cell
     }
-    
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    
+
         indexOfData = indexPath.row
-        
+
         tableView.deselectRow(at: indexPath, animated: true)
-        
+
         performSegue(withIdentifier: "FromHistoryPage_To_DetailPage", sender: self)
-        
+
     }
-    
-    
+
      // MARK: - Navigation
 
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     
+
         if segue.identifier == "FromHistoryPage_To_SettingsPage" {
-            
-            let destinationSettingVC = segue.destination as! SettingsPageVC
-            
-            destinationSettingVC.selectedStationIndex = destinationSettingVC.stationsArray.index(of: "\(currentWeatherStationName)")!
-            
-            destinationSettingVC.selectedTemperatureScale = currentTemperatureScale.rawValue
-            
-        } else if segue.identifier == "FromHistoryPage_To_DetailPage" {
-            
-            let destinationDetailVC = segue.destination as! DetailAboutWeatherInfoVC
-            
-            if let validIndex = indexOfData {
-                
-                destinationDetailVC.weatherInformation = filteredWeatherInfoArray[validIndex]
-                
-                destinationDetailVC.stationName = currentWeatherStationName
-                
-                destinationDetailVC.temperatureScale = currentTemperatureScale
+
+            guard let destination = segue.destination as? SettingsPageVC else {
+                return
             }
+
+            guard let stationIndex = destination.stations.index(of: currentWeatherStation) else {
+                return
+            }
+            
+            destination.selectedStationIndex = stationIndex
+            destination.selectedTemperatureScale = currentTemperatureScale.rawValue
+
+        } else if segue.identifier == "FromHistoryPage_To_DetailPage" {
+
+            guard let destination = segue.destination as? DetailAboutWeatherInfoVC else {
+                return
+            }
+
+            guard let index = indexOfData else {
+                return
+            }
+            
+            destination.weatherInformation = filteredWeatherData[index]
+            destination.station = currentWeatherStation
+            destination.temperatureScale = currentTemperatureScale
         }
      }
 
     // Get Data Back From Setting Page
-    @IBAction func unwindFromSettingVC(_ sender: UIStoryboardSegue) {
+    @IBAction func unwindSegue(_ sender: UIStoryboardSegue) {
         
-        if sender.source is SettingsPageVC {
-            if let SettingVC = sender.source as? SettingsPageVC {
-                // Set Weather Station
+        if let sender = sender.source as? SettingsPageVC {
+            
+            // get station from picker view
+            let station = sender.stations[sender.pickerView.selectedRow(inComponent: 0)]
+            
+            // update weather data
+            if station != currentWeatherStation {
                 
-                let stationNameFromSettingPage = SettingVC.stationsArray[SettingVC.pickerView.selectedRow(inComponent: 0)]
+                currentWeatherStation = station
                 
-                if stationNameFromSettingPage != currentWeatherStationName {
-                    currentWeatherStationName = stationNameFromSettingPage
-                    
-                    weatherInfoArray.removeAll()
-                    filteredWeatherInfoArray.removeAll()
-                    
-                    LoadData(stationName: currentWeatherStationName)
-                }
-                // Set Temperature Scale
-                self.currentTemperatureScale = TemperatureScale(rawValue: SettingVC.segmentedTempScale.selectedSegmentIndex)!
+                weatherDataByStation.removeAll()
+                filteredWeatherData.removeAll()
+                
+                loadWeatherStationData(station: currentWeatherStation)
+            }
+            
+            // set temperature scale
+            if let temperatureScale = TemperatureScale(rawValue: sender.segmentedTempScale.selectedSegmentIndex) {
+                currentTemperatureScale = temperatureScale
             }
         }
     }
-    
+
     // MARK: Private Method
-    private func LoadData(stationName: String) {
-        
+    private func loadWeatherStationData(station: String) {
+
         // Create URL object
-        let fileUrl = CreateFullURL(stationName)
-        
+        let fileUrl = createURLString(station)
+
         // Check URL
         if let validURL = fileUrl {
-            
-            _ = URLSession.shared.dataTask(with: validURL) { (data, response, error) in
-                
+
+            _ = URLSession.shared.dataTask(with: validURL) { (data, _, error) in
+
                 // Is valid data ?
                 if let dataFromMetOffice = data {
-                    
-                    // Convert data to string
-                    if var stringRepresentation = String(data: dataFromMetOffice,encoding: String.Encoding.utf8) {
 
-                        self.ParseDataIntoArray(&stringRepresentation)
-                        
+                    // Convert data to string
+                    if var stringRepresentation = String(data: dataFromMetOffice, encoding: String.Encoding.utf8) {
+
+                        self.splitWeatherStationDataByLines(&stringRepresentation)
+
                     }
                 } else if let receivedError = error {
                     print(receivedError.localizedDescription)
                 }
                 DispatchQueue.main.sync {
-                    self.filteredWeatherInfoArray = self.weatherInfoArray;
-                    self.TableRefresh()
+                    self.filteredWeatherData = self.weatherDataByStation
+                    self.doTableRefresh()
                 }
             }.resume()
-            
+
         } else {
             print("Please enter valid URL address.")
         }
     }
-    
-    private func ParseDataIntoArray(_ stringRepresentation: inout String) {
-    
+
+    private func splitWeatherStationDataByLines(_ stringRepresentation: inout String) {
+
         // Remove escaped characters '\r'
         stringRepresentation = stringRepresentation.replacingOccurrences(of: "\r", with: "")
-        
+
         // Delete Header
         var token = String(describing: stringRepresentation).components(separatedBy: "hours\n")
-        
+
         // Split by new line
         let lines = token[1].split(separator: "\n")
-        
+
         // Parse Single Line
         for line in lines {
-            ParseSingleLine(String(line))
+            parseSingleLine(String(line))
         }
     }
-    
-    private func ParseSingleLine(_ singleLine: String){
-        
+
+    private func parseSingleLine(_ singleLine: String) {
+
         // split line by empty spaces
         let splittedLine = singleLine.split(separator: " ", omittingEmptySubsequences: true)
-        
+
         guard splittedLine.count > 6 else {
-            return;
+            return
         }
         // set date
         let year = Int(splittedLine[0])
-        let month = Int(splittedLine[1])
+        let month = Month(rawValue: Int(splittedLine[1])!)
         // set weather info
         let maxT = Double(splittedLine[2])
         let minT = Double(splittedLine[3])
         let daysAR = Int(splittedLine[4])
         let rainfall = Double(splittedLine[5])
         let sunshine = Double(splittedLine[6])
-        
+
         // Check if year and month valid value
         if let year = year, let month = month {
-            
+
             // Add new instances
-            weatherInfoArray.append(WeatherMeasurementsPerWeek(year: year, month: month, meanMaxTemperature: maxT, meanMinTemperature: minT, daysOfAirFrost: daysAR, totalRainfall: rainfall, totalSunshineDuration: sunshine))
-            
+            weatherDataByStation.append(WeatherMeasurementsPerWeek(year: year, month: month, meanMaxTemperature: maxT, meanMinTemperature: minT, daysOfAirFrost: daysAR, totalRainfall: rainfall, totalSunshineDuration: sunshine))
+
         }
     }
-    
-    private func SetupSearchController() {
+
+    private func setupSearchController() {
         // Do not hide when scroll
         navigationItem.hidesSearchBarWhenScrolling = false
-        
+
         // Set delegate
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
@@ -200,64 +208,58 @@ class HistoryTableVC: UITableViewController {
         navigationItem.searchController = searchController
         definesPresentationContext = true
     }
-    
-    private func CreateFullURL(_ stationName: String) -> URL? {
-        
+
+    private func createURLString(_ stationName: String) -> URL? {
+
         // Delete redundand characters
         var result = stationName.replacingOccurrences(of: " ", with: "")
         result = result.replacingOccurrences(of: "-", with: "")
-    
+
         return URL(string: stubURL + result.lowercased() + "data.txt")
     }
-    
-    private func TableRefresh() {
-        
+
+    private func doTableRefresh() {
+
         // Change title when change weather station
-        self.navigationItem.title = currentWeatherStationName + " Station"
+        self.navigationItem.title = currentWeatherStation + " Station"
         // Do table refresh
         self.tableView.reloadData()
     }
 }
 
 extension HistoryTableVC: UISearchResultsUpdating {
-    
+
     func updateSearchResults(for searchController: UISearchController) {
         filterContentForSearchText(searchController.searchBar.text!)
     }
-    
+
     func searchBarIsEmpty() -> Bool {
         // Returns true if the text is empty or nil
         return searchController.searchBar.text?.isEmpty ?? true
     }
-    
+
     func filterContentForSearchText(_ searchText: String, scope: String = "All") {
         guard !searchText.isEmpty else {
             // If Search Controller Empty Display All Cells
-            filteredWeatherInfoArray = weatherInfoArray
-            TableRefresh()
+            filteredWeatherData = weatherDataByStation
+            doTableRefresh()
             return
         }
-        filteredWeatherInfoArray = weatherInfoArray.filter({ weatherInfo -> Bool in
+        filteredWeatherData = weatherDataByStation.filter({ weatherInfo -> Bool in
             // Search by full date (1995 March)
-            weatherInfo.FullDate.contains(searchText)
+            weatherInfo.getFullDate.contains(searchText)
         })
-        TableRefresh()
+        doTableRefresh()
     }
-    
+
 }
 
 extension String {
     func capitalizingFirstLetter() -> String {
         return prefix(1).capitalized + dropFirst()
     }
-    
+
     mutating func capitalizeFirstLetter() {
         self = self.capitalizingFirstLetter()
     }
 }
-
-
-
-
-
-

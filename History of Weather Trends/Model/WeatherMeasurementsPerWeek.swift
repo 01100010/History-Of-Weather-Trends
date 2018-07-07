@@ -8,96 +8,50 @@
 
 import Foundation
 
-enum Month: String {
-    case January
-    case February
-    case March
-    case April
-    case May
-    case June
-    case July
-    case August
-    case September
-    case October
-    case November
-    case December
+enum Month: Int {
+    case january = 1, february, march, april, may, june, july, august, september, october, november, december
 }
 
 enum TemperatureScale: Int {
-    case Celsius = 0
-    case Fahrenheit
-    case Kelvin
+    case celsius
+    case fahrenheit
+    case kelvin
 }
 
-class WeatherMeasurementsPerWeek {
+struct WeatherMeasurementsPerWeek {
+
+    // MARK: Stored Properties
     
-    //MARK: Properties
-    var _year: Int = -1
-    var _month: Int = -1
+    var year = 0
+    var month = Month.january
+
+    var meanMaxTemperature: Double?
+    var meanMinTemperature: Double?
+    var daysOfAirFrost: Int?
+    var totalRainfall: Double?
+    var totalSunshineDuration: Double?
+
+    // MARK: Computed Properties
     
-    var _meanMaxTemperature: Double?
-    var _meanMinTemperature: Double?
-    var _daysOfAirFrost: Int?
-    var _totalRainfall: Double?
-    var _totalSunshineDuration: Double?
-    
-    var FullDate: String {
-        get {
-            return String(_year) + " " + GetMonthStringRepresentation()
-        }
+    var getFullDate: String {
+        return String(year) + " " + getMonthStringRepresentation
     }
     
-    //MARK: Initializers
-    init(year: Int, month:Int) {
-        self._year = year
-        self._month = month
-    }
-    
-    init(year: Int, month:Int, meanMaxTemperature: Double?, meanMinTemperature: Double?, daysOfAirFrost: Int?, totalRainfall: Double?, totalSunshineDuration: Double?) {
-        // set date
-        self._year = year
-        self._month = month
-        
-        // set optional weather info
-        self._meanMaxTemperature = meanMaxTemperature
-        self._meanMinTemperature = meanMinTemperature
-        self._daysOfAirFrost = daysOfAirFrost
-        self._totalRainfall = totalRainfall
-        self._totalSunshineDuration = totalSunshineDuration
-        
-    }
-    
-    func GetMonthStringRepresentation() -> String {
-        
-        switch self._month {
-        case 1:
-            return Month.January.rawValue
-        case 2:
-            return Month.February.rawValue
-        case 3:
-            return Month.March.rawValue
-        case 4:
-            return Month.April.rawValue
-        case 5:
-            return Month.May.rawValue
-        case 6:
-            return Month.June.rawValue
-        case 7:
-            return Month.July.rawValue
-        case 8:
-            return Month.August.rawValue
-        case 9:
-            return Month.September.rawValue
-        case 10:
-            return Month.October.rawValue
-        case 11:
-            return Month.November.rawValue
-        case 12:
-            return Month.December.rawValue
-            
-        default:
-            return "---"
-        }
+    var getMonthStringRepresentation: String {
+        return String(describing: month).capitalizingFirstLetter()
     }
 
+    // MARK: Initializers
+
+    // default memberwise init
+    
+    // MARK: Methods
+    
+    func getTemperatureValue(by scale: TemperatureScale, value temperature: Double) -> String {
+        switch scale {
+        case .celsius: return String(temperature)
+        case .fahrenheit: return String(temperature * 9 / 5 + 32)
+        case .kelvin: return String(temperature + 273.15)
+        }
+    }
 }

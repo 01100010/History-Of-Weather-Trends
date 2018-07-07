@@ -84,7 +84,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="History of Weather Trends" largeTitleDisplayMode="always" id="uZl-hy-P4J">
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="Settings" id="wMP-E7-DPS">
+                        <barButtonItem key="rightBarButtonItem" image="Settings" id="wMP-E7-DPS">
                             <inset key="imageInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="-1"/>
                             <connections>
                                 <segue destination="q1U-8i-edm" kind="show" identifier="FromHistoryPage_To_SettingsPage" id="ZPB-Dc-yoN"/>
@@ -187,7 +187,7 @@
                     <navigationItem key="navigationItem" id="fgW-Uj-fo5">
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="75x-ip-oXd">
                             <connections>
-                                <segue destination="TUk-kf-U89" kind="unwind" unwindAction="unwindFromSettingVC:" id="Kut-2e-Fkv"/>
+                                <segue destination="TUk-kf-U89" kind="unwind" unwindAction="unwindSegue:" id="T8b-UK-xVj"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -397,10 +397,10 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="DaysAFTextField" destination="l5M-uq-TtI" id="tf0-NA-NLp"/>
-                        <outlet property="RainfallTextField" destination="j0q-PA-6mw" id="NlJ-fY-yjU"/>
-                        <outlet property="SunshineTextField" destination="T8D-SL-dM4" id="aJJ-LF-jvy"/>
+                        <outlet property="daysAirFrostTextField" destination="l5M-uq-TtI" id="tf0-NA-NLp"/>
+                        <outlet property="rainfallTextField" destination="j0q-PA-6mw" id="NlJ-fY-yjU"/>
                         <outlet property="stationNameLabel" destination="1VV-sC-Adi" id="3KZ-G5-dZ3"/>
+                        <outlet property="sunshineTextField" destination="T8D-SL-dM4" id="aJJ-LF-jvy"/>
                         <outlet property="tMaxTextField" destination="bNi-NZ-Cdr" id="i2e-Ya-dZ3"/>
                         <outlet property="tMinTextField" destination="VQc-zS-IAp" id="MBR-w7-5pT"/>
                         <outlet property="yearLabel" destination="qa7-Ha-El8" id="zE3-ab-Soo"/>
