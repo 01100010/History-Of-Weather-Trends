@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class HistoryTableVC: UITableViewController {
 
@@ -23,7 +24,7 @@ class HistoryTableVC: UITableViewController {
     var filteredWeatherData = [WeatherMeasurementsPerWeek]()
     var indexOfData: Int?
 
-    // MARK: Override Methods UIViewController
+    // MARK: ViewController lifecycle methods
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,9 +74,9 @@ class HistoryTableVC: UITableViewController {
             guard let stationIndex = destination.stations.index(of: currentWeatherStation) else {
                 return
             }
-            
+
             destination.selectedStationIndex = stationIndex
-            destination.selectedTemperatureScale = currentTemperatureScale.rawValue
+            destination.selectedTemperatureScale = currentTemperatureScale
 
         } else if segue.identifier == "FromHistoryPage_To_DetailPage" {
 
@@ -86,7 +87,7 @@ class HistoryTableVC: UITableViewController {
             guard let index = indexOfData else {
                 return
             }
-            
+
             destination.weatherInformation = filteredWeatherData[index]
             destination.station = currentWeatherStation
             destination.temperatureScale = currentTemperatureScale
@@ -95,23 +96,23 @@ class HistoryTableVC: UITableViewController {
 
     // Get Data Back From Setting Page
     @IBAction func unwindSegue(_ sender: UIStoryboardSegue) {
-        
+
         if let sender = sender.source as? SettingsPageVC {
-            
+
             // get station from picker view
             let station = sender.stations[sender.pickerView.selectedRow(inComponent: 0)]
-            
+
             // update weather data
             if station != currentWeatherStation {
-                
+
                 currentWeatherStation = station
-                
+
                 weatherDataByStation.removeAll()
                 filteredWeatherData.removeAll()
-                
+
                 loadWeatherStationData(station: currentWeatherStation)
             }
-            
+
             // set temperature scale
             if let temperatureScale = TemperatureScale(rawValue: sender.segmentedTempScale.selectedSegmentIndex) {
                 currentTemperatureScale = temperatureScale
@@ -121,50 +122,49 @@ class HistoryTableVC: UITableViewController {
 
     // MARK: Private Method
     private func loadWeatherStationData(station: String) {
-
+        
         // Create URL object
-        let fileUrl = createURLString(station)
-
+        let urlString = createURLString(station)
+        
         // Check URL
-        if let validURL = fileUrl {
-
-            _ = URLSession.shared.dataTask(with: validURL) { (data, _, error) in
-
-                // Is valid data ?
-                if let dataFromMetOffice = data {
-
-                    // Convert data to string
-                    if var stringRepresentation = String(data: dataFromMetOffice, encoding: String.Encoding.utf8) {
-
-                        self.splitWeatherStationDataByLines(&stringRepresentation)
-
-                    }
-                } else if let receivedError = error {
-                    print(receivedError.localizedDescription)
+        guard let validURL = urlString else {
+            print("Error on URL String")
+            return
+        }
+        
+        Alamofire.request(validURL).response { response in
+            // Check on error
+            guard response.error == nil else {
+                print("Error on HTTP Request: \(String(describing: response.error?.localizedDescription))")
+                return
+            }
+            // Is valid data ?
+            if let dataFromMetOffice = response.data {
+                
+                // Convert data to string
+                if let stringRepresentation = String(data: dataFromMetOffice, encoding: String.Encoding.utf8) {
+                    
+                    self.splitWeatherStationDataByLines(stringRepresentation)
+                    
                 }
-                DispatchQueue.main.sync {
-                    self.filteredWeatherData = self.weatherDataByStation
-                    self.doTableRefresh()
-                }
-            }.resume()
-
-        } else {
-            print("Please enter valid URL address.")
+            }
+            self.filteredWeatherData = self.weatherDataByStation
+            self.doTableRefresh()
         }
     }
-
-    private func splitWeatherStationDataByLines(_ stringRepresentation: inout String) {
+    
+    private func splitWeatherStationDataByLines(_ stringRepresentation: String) {
 
         // Remove escaped characters '\r'
-        stringRepresentation = stringRepresentation.replacingOccurrences(of: "\r", with: "")
+        let withoutEscapingSymbol = stringRepresentation.replacingOccurrences(of: "\r", with: "")
 
         // Delete Header
-        var token = String(describing: stringRepresentation).components(separatedBy: "hours\n")
+        let token = String(describing: withoutEscapingSymbol).components(separatedBy: "hours\n")
 
         // Split by new line
         let lines = token[1].split(separator: "\n")
 
-        // Parse Single Line
+        // Parse single Line
         for line in lines {
             parseSingleLine(String(line))
         }

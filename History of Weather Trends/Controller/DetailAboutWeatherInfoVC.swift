@@ -26,6 +26,8 @@ class DetailAboutWeatherInfoVC: UIViewController {
     @IBOutlet weak var rainfallTextField: UITextField!
     @IBOutlet weak var sunshineTextField: UITextField!
 
+    // MARK: ViewController Lifecycle Methods
+
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -35,40 +37,29 @@ class DetailAboutWeatherInfoVC: UIViewController {
 
         stationNameLabel.text = station
 
-        if let validWeatherInfo = weatherInformation {
+        if let data = weatherInformation {
 
-            yearLabel.text = String(validWeatherInfo.year) + ", " + validWeatherInfo.getMonthStringRepresentation
+            yearLabel.text = "\(data.year), \(data.getMonthStringRepresentation)"
 
-            if let meanMaxTemperature = validWeatherInfo.meanMaxTemperature {
-                tMaxTextField.text = validWeatherInfo.getTemperatureValue(by: temperatureScale, value: meanMaxTemperature)
-            } else {
-                tMaxTextField.text = "---"
+            if let maxT = data.meanMaxTemperature {
+                tMaxTextField.text = data.getTemperatureValue(by: temperatureScale, value: maxT)
             }
 
-            if let meanMinTemperature = validWeatherInfo.meanMinTemperature {
-                tMinTextField.text = validWeatherInfo.getTemperatureValue(by: temperatureScale, value: meanMinTemperature)
-            } else {
-                tMinTextField.text = "---"
+            if let minT = data.meanMinTemperature {
+                tMinTextField.text = data.getTemperatureValue(by: temperatureScale, value: minT)
             }
 
-            if let validAFValue = validWeatherInfo.daysOfAirFrost {
-                daysAirFrostTextField.text = String(validAFValue)
-            } else {
-                daysAirFrostTextField.text = "---"
+            if let af = data.daysOfAirFrost {
+                daysAirFrostTextField.text = String(af)
             }
 
-            if let validRainfallValue = validWeatherInfo.totalRainfall {
-                rainfallTextField.text = String(validRainfallValue)
-            } else {
-                rainfallTextField.text = "---"
+            if let rain = data.totalRainfall {
+                rainfallTextField.text = String(rain)
             }
 
-            if let validSunshineValue = validWeatherInfo.totalSunshineDuration {
-                sunshineTextField.text = String(validSunshineValue)
-            } else {
-                sunshineTextField.text = "---"
+            if let sun = data.totalSunshineDuration {
+                sunshineTextField.text = String(sun)
             }
-
         }
     }
 }

@@ -21,7 +21,7 @@ enum TemperatureScale: Int {
 struct WeatherMeasurementsPerWeek {
 
     // MARK: Stored Properties
-    
+
     var year = 0
     var month = Month.january
 
@@ -32,11 +32,11 @@ struct WeatherMeasurementsPerWeek {
     var totalSunshineDuration: Double?
 
     // MARK: Computed Properties
-    
+
     var getFullDate: String {
         return String(year) + " " + getMonthStringRepresentation
     }
-    
+
     var getMonthStringRepresentation: String {
         return String(describing: month).capitalizingFirstLetter()
     }
@@ -44,9 +44,9 @@ struct WeatherMeasurementsPerWeek {
     // MARK: Initializers
 
     // default memberwise init
-    
+
     // MARK: Methods
-    
+
     func getTemperatureValue(by scale: TemperatureScale, value temperature: Double) -> String {
         switch scale {
         case .celsius: return String(temperature)

@@ -5,6 +5,9 @@
       location = "group:History of Weather Trends.xcodeproj">
    </FileRef>
    <FileRef
+      location = "group:History of Weather Trends/../.swiftlint.yml">
+   </FileRef>
+   <FileRef
       location = "group:Pods/Pods.xcodeproj">
    </FileRef>
 </Workspace>

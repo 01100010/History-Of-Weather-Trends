@@ -12,6 +12,7 @@
 		4907DEE320E64C260083FCF8 /* Megan June.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4907DEE220E64C0E0083FCF8 /* Megan June.otf */; };
 		4907DEE420E64C290083FCF8 /* BebasNeue-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4907DEE120E64C020083FCF8 /* BebasNeue-Regular.ttf */; };
 		4907DEE620E670A40083FCF8 /* DetailAboutWeatherInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4907DEE520E670A40083FCF8 /* DetailAboutWeatherInfoVC.swift */; };
+		497C104C20F2D2E200BFE70A /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 497C104B20F2D2E200BFE70A /* .swiftlint.yml */; };
 		49B3C08520E3CDD100BD775B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B3C08420E3CDD100BD775B /* AppDelegate.swift */; };
 		49B3C08A20E3CDD100BD775B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49B3C08820E3CDD100BD775B /* Main.storyboard */; };
 		49B3C08C20E3CDD100BD775B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49B3C08B20E3CDD100BD775B /* Assets.xcassets */; };
@@ -29,6 +30,7 @@
 		4907DEE120E64C020083FCF8 /* BebasNeue-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BebasNeue-Regular.ttf"; sourceTree = "<group>"; };
 		4907DEE220E64C0E0083FCF8 /* Megan June.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Megan June.otf"; sourceTree = "<group>"; };
 		4907DEE520E670A40083FCF8 /* DetailAboutWeatherInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailAboutWeatherInfoVC.swift; sourceTree = "<group>"; };
+		497C104B20F2D2E200BFE70A /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; name = .swiftlint.yml; path = ../.swiftlint.yml; sourceTree = "<group>"; };
 		49B3C08120E3CDD100BD775B /* History of Weather Trends.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "History of Weather Trends.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		49B3C08420E3CDD100BD775B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		49B3C08920E3CDD100BD775B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -89,6 +91,13 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		497C104D20F2E1BD00BFE70A /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
 		49B3C07820E3CDD100BD775B = {
 			isa = PBXGroup;
 			children = (
@@ -110,9 +119,11 @@
 		49B3C08320E3CDD100BD775B /* History of Weather Trends */ = {
 			isa = PBXGroup;
 			children = (
+				497C104D20F2E1BD00BFE70A /* Helper */,
 				49B3C09620E3CE4F00BD775B /* Model */,
 				4907DEDD20E440390083FCF8 /* Controller */,
 				49B3C08420E3CDD100BD775B /* AppDelegate.swift */,
+				497C104B20F2D2E200BFE70A /* .swiftlint.yml */,
 				49B3C08820E3CDD100BD775B /* Main.storyboard */,
 				49B3C08B20E3CDD100BD775B /* Assets.xcassets */,
 				49B3C08D20E3CDD100BD775B /* LaunchScreen.storyboard */,
@@ -137,11 +148,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 49B3C09320E3CDD100BD775B /* Build configuration list for PBXNativeTarget "History of Weather Trends" */;
 			buildPhases = (
-				493192DE20F0168B00EDE1A6 /* ShellScript */,
 				9CF2BD564E255AE1C9419290 /* [CP] Check Pods Manifest.lock */,
+				497C104A20F2D17700BFE70A /* SwiftLint */,
 				49B3C07D20E3CDD100BD775B /* Sources */,
 				49B3C07E20E3CDD100BD775B /* Frameworks */,
 				49B3C07F20E3CDD100BD775B /* Resources */,
+				BB3186F63477BE732D6289BD /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -191,6 +203,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				497C104C20F2D2E200BFE70A /* .swiftlint.yml in Resources */,
 				4907DEE420E64C290083FCF8 /* BebasNeue-Regular.ttf in Resources */,
 				49B3C08F20E3CDD100BD775B /* LaunchScreen.storyboard in Resources */,
 				49B3C08C20E3CDD100BD775B /* Assets.xcassets in Resources */,
@@ -202,13 +215,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		493192DE20F0168B00EDE1A6 /* ShellScript */ = {
+		497C104A20F2D17700BFE70A /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = SwiftLint;
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -231,6 +245,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BB3186F63477BE732D6289BD /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-History of Weather Trends/Pods-History of Weather Trends-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-History of Weather Trends/Pods-History of Weather Trends-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
