@@ -13,6 +13,8 @@
 		4907DEE420E64C290083FCF8 /* BebasNeue-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4907DEE120E64C020083FCF8 /* BebasNeue-Regular.ttf */; };
 		4907DEE620E670A40083FCF8 /* DetailAboutWeatherInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4907DEE520E670A40083FCF8 /* DetailAboutWeatherInfoVC.swift */; };
 		497C104C20F2D2E200BFE70A /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 497C104B20F2D2E200BFE70A /* .swiftlint.yml */; };
+		49A9F17120F6289A0098E9FF /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A9F17020F6289A0098E9FF /* Settings.swift */; };
+		49A9F17320F628B90098E9FF /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A9F17220F628B90098E9FF /* Parser.swift */; };
 		49B3C08520E3CDD100BD775B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B3C08420E3CDD100BD775B /* AppDelegate.swift */; };
 		49B3C08A20E3CDD100BD775B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49B3C08820E3CDD100BD775B /* Main.storyboard */; };
 		49B3C08C20E3CDD100BD775B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49B3C08B20E3CDD100BD775B /* Assets.xcassets */; };
@@ -31,6 +33,8 @@
 		4907DEE220E64C0E0083FCF8 /* Megan June.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Megan June.otf"; sourceTree = "<group>"; };
 		4907DEE520E670A40083FCF8 /* DetailAboutWeatherInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailAboutWeatherInfoVC.swift; sourceTree = "<group>"; };
 		497C104B20F2D2E200BFE70A /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; name = .swiftlint.yml; path = ../.swiftlint.yml; sourceTree = "<group>"; };
+		49A9F17020F6289A0098E9FF /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		49A9F17220F628B90098E9FF /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		49B3C08120E3CDD100BD775B /* History of Weather Trends.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "History of Weather Trends.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		49B3C08420E3CDD100BD775B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		49B3C08920E3CDD100BD775B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -94,6 +98,8 @@
 		497C104D20F2E1BD00BFE70A /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				49A9F17020F6289A0098E9FF /* Settings.swift */,
+				49A9F17220F628B90098E9FF /* Parser.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -119,13 +125,13 @@
 		49B3C08320E3CDD100BD775B /* History of Weather Trends */ = {
 			isa = PBXGroup;
 			children = (
-				497C104D20F2E1BD00BFE70A /* Helper */,
 				49B3C09620E3CE4F00BD775B /* Model */,
 				4907DEDD20E440390083FCF8 /* Controller */,
 				49B3C08420E3CDD100BD775B /* AppDelegate.swift */,
 				497C104B20F2D2E200BFE70A /* .swiftlint.yml */,
-				49B3C08820E3CDD100BD775B /* Main.storyboard */,
+				497C104D20F2E1BD00BFE70A /* Helper */,
 				49B3C08B20E3CDD100BD775B /* Assets.xcassets */,
+				49B3C08820E3CDD100BD775B /* Main.storyboard */,
 				49B3C08D20E3CDD100BD775B /* LaunchScreen.storyboard */,
 				49B3C09020E3CDD100BD775B /* Info.plist */,
 				4907DEE020E64BE40083FCF8 /* Fonts */,
@@ -276,6 +282,8 @@
 				4907DEE620E670A40083FCF8 /* DetailAboutWeatherInfoVC.swift in Sources */,
 				49F5A3D420EA9543003EC7FF /* SettingsPageVC.swift in Sources */,
 				4907DEDC20E440250083FCF8 /* HistoryTableVC.swift in Sources */,
+				49A9F17320F628B90098E9FF /* Parser.swift in Sources */,
+				49A9F17120F6289A0098E9FF /* Settings.swift in Sources */,
 				49B3C09820E3CECF00BD775B /* WeatherMeasurementsPerWeek.swift in Sources */,
 				49B3C08520E3CDD100BD775B /* AppDelegate.swift in Sources */,
 			);

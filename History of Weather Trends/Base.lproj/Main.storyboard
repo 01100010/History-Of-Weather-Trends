@@ -75,6 +75,7 @@
                                     <outlet property="monthIcon" destination="f2q-W9-9OF" id="Ya0-II-MeR"/>
                                     <outlet property="monthLabel" destination="x4e-mG-rRh" id="qrV-CL-kys"/>
                                     <outlet property="yearLabel" destination="Zx3-lb-VyM" id="hPH-IZ-SFR"/>
+                                    <segue destination="3F5-p9-Y8K" kind="show" identifier="segueToDetailsVC" id="3nT-bB-kHu"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -87,14 +88,11 @@
                         <barButtonItem key="rightBarButtonItem" image="Settings" id="wMP-E7-DPS">
                             <inset key="imageInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="-1"/>
                             <connections>
-                                <segue destination="q1U-8i-edm" kind="show" identifier="FromHistoryPage_To_SettingsPage" id="ZPB-Dc-yoN"/>
+                                <segue destination="q1U-8i-edm" kind="show" id="Vx1-3j-NPg"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                    <connections>
-                        <segue destination="3F5-p9-Y8K" kind="show" identifier="FromHistoryPage_To_DetailPage" id="ib7-iq-fJP"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OmY-bS-Rjo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -187,7 +185,7 @@
                     <navigationItem key="navigationItem" id="fgW-Uj-fo5">
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="75x-ip-oXd">
                             <connections>
-                                <segue destination="TUk-kf-U89" kind="unwind" unwindAction="unwindSegue:" id="T8b-UK-xVj"/>
+                                <segue destination="TUk-kf-U89" kind="unwind" unwindAction="unwindSegue:" id="Gtg-Ga-3q5"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -199,7 +197,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Axk-lw-jtW" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="TUk-kf-U89" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="999.20000000000005" y="951.27436281859082"/>
+            <point key="canvasLocation" x="999" y="950"/>
         </scene>
         <!--Detail About Weather InfoVC-->
         <scene sceneID="Ros-gn-YP0">
@@ -397,18 +395,18 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="dateLabel" destination="qa7-Ha-El8" id="Z4Y-bB-W6W"/>
                         <outlet property="daysAirFrostTextField" destination="l5M-uq-TtI" id="tf0-NA-NLp"/>
                         <outlet property="rainfallTextField" destination="j0q-PA-6mw" id="NlJ-fY-yjU"/>
                         <outlet property="stationNameLabel" destination="1VV-sC-Adi" id="3KZ-G5-dZ3"/>
                         <outlet property="sunshineTextField" destination="T8D-SL-dM4" id="aJJ-LF-jvy"/>
                         <outlet property="tMaxTextField" destination="bNi-NZ-Cdr" id="i2e-Ya-dZ3"/>
                         <outlet property="tMinTextField" destination="VQc-zS-IAp" id="MBR-w7-5pT"/>
-                        <outlet property="yearLabel" destination="qa7-Ha-El8" id="zE3-ab-Soo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AOd-qZ-ikh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1760.8" y="184.85757121439281"/>
+            <point key="canvasLocation" x="1889" y="185"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Qh4-VI-rpB">
@@ -424,7 +422,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wwp-d5-fgn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="191" y="185"/>
+            <point key="canvasLocation" x="159" y="185"/>
         </scene>
     </scenes>
     <resources>

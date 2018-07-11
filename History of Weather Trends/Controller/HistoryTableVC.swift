@@ -13,12 +13,7 @@ class HistoryTableVC: UITableViewController {
 
     // MARK: Properties
 
-    let stubURL = "https://www.metoffice.gov.uk/pub/data/weather/uk/climate/stationdata/"
-
     var searchController = UISearchController(searchResultsController: nil)
-
-    var currentWeatherStation = "Bradford"
-    var currentTemperatureScale = TemperatureScale.celsius
 
     var weatherDataByStation = [WeatherMeasurementsPerWeek]()
     var filteredWeatherData = [WeatherMeasurementsPerWeek]()
@@ -29,7 +24,7 @@ class HistoryTableVC: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        loadWeatherStationData(station: currentWeatherStation)
+        loadWeatherStationData(station: Settings.currentStation)
 
         setupSearchController()
     }
@@ -53,11 +48,11 @@ class HistoryTableVC: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        indexOfData = indexPath.row
+        //indexOfData = indexPath.row
 
-        tableView.deselectRow(at: indexPath, animated: true)
+        //tableView.deselectRow(at: indexPath, animated: true)
 
-        performSegue(withIdentifier: "FromHistoryPage_To_DetailPage", sender: self)
+        //performSegue(withIdentifier: "FromHistoryPage_To_DetailPage", sender: self)
 
     }
 
@@ -65,32 +60,14 @@ class HistoryTableVC: UITableViewController {
 
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
-        if segue.identifier == "FromHistoryPage_To_SettingsPage" {
+        if segue.identifier == "segueToDetailsVC" {
 
-            guard let destination = segue.destination as? SettingsPageVC else {
+            guard let cell = sender as? WeatherInfoCell, let indexPath = tableView.indexPath(for: cell), let destination = segue.destination as? DetailAboutWeatherInfoVC else {
+                assertionFailure("Error: There is no such cell")
                 return
             }
 
-            guard let stationIndex = destination.stations.index(of: currentWeatherStation) else {
-                return
-            }
-
-            destination.selectedStationIndex = stationIndex
-            destination.selectedTemperatureScale = currentTemperatureScale
-
-        } else if segue.identifier == "FromHistoryPage_To_DetailPage" {
-
-            guard let destination = segue.destination as? DetailAboutWeatherInfoVC else {
-                return
-            }
-
-            guard let index = indexOfData else {
-                return
-            }
-
-            destination.weatherInformation = filteredWeatherData[index]
-            destination.station = currentWeatherStation
-            destination.temperatureScale = currentTemperatureScale
+            destination.weatherInformation = filteredWeatherData[indexPath.row]
         }
      }
 
@@ -101,21 +78,21 @@ class HistoryTableVC: UITableViewController {
 
             // get station from picker view
             let station = sender.stations[sender.pickerView.selectedRow(inComponent: 0)]
-
+            
             // update weather data
-            if station != currentWeatherStation {
+            if station != Settings.currentStation {
 
-                currentWeatherStation = station
+                Settings.currentStation = station
 
                 weatherDataByStation.removeAll()
                 filteredWeatherData.removeAll()
 
-                loadWeatherStationData(station: currentWeatherStation)
+                loadWeatherStationData(station: Settings.currentStation)
             }
 
             // set temperature scale
             if let temperatureScale = TemperatureScale(rawValue: sender.segmentedTempScale.selectedSegmentIndex) {
-                currentTemperatureScale = temperatureScale
+                Settings.temperatureScale = temperatureScale
             }
         }
     }
@@ -138,67 +115,30 @@ class HistoryTableVC: UITableViewController {
                 print("Error on HTTP Request: \(String(describing: response.error?.localizedDescription))")
                 return
             }
-            // Is valid data ?
+            // is valid data ?
             if let dataFromMetOffice = response.data {
                 
-                // Convert data to string
+                // convert to string
                 if let stringRepresentation = String(data: dataFromMetOffice, encoding: String.Encoding.utf8) {
                     
-                    self.splitWeatherStationDataByLines(stringRepresentation)
+                    // parse data
+                    let lines = Parser.splitWeatherStationDataByLines(stringRepresentation)
                     
+                    for line in lines {
+                        if let weatherInfo = Parser.parseSingleLine(String(line)) {
+                            self.weatherDataByStation.append(weatherInfo)
+                        }
+                    }
                 }
             }
+            // update view
             self.filteredWeatherData = self.weatherDataByStation
             self.doTableRefresh()
         }
     }
-    
-    private func splitWeatherStationDataByLines(_ stringRepresentation: String) {
-
-        // Remove escaped characters '\r'
-        let withoutEscapingSymbol = stringRepresentation.replacingOccurrences(of: "\r", with: "")
-
-        // Delete Header
-        let token = String(describing: withoutEscapingSymbol).components(separatedBy: "hours\n")
-
-        // Split by new line
-        let lines = token[1].split(separator: "\n")
-
-        // Parse single Line
-        for line in lines {
-            parseSingleLine(String(line))
-        }
-    }
-
-    private func parseSingleLine(_ singleLine: String) {
-
-        // split line by empty spaces
-        let splittedLine = singleLine.split(separator: " ", omittingEmptySubsequences: true)
-
-        guard splittedLine.count > 6 else {
-            return
-        }
-        // set date
-        let year = Int(splittedLine[0])
-        let month = Month(rawValue: Int(splittedLine[1])!)
-        // set weather info
-        let maxT = Double(splittedLine[2])
-        let minT = Double(splittedLine[3])
-        let daysAR = Int(splittedLine[4])
-        let rainfall = Double(splittedLine[5])
-        let sunshine = Double(splittedLine[6])
-
-        // Check if year and month valid value
-        if let year = year, let month = month {
-
-            // Add new instances
-            weatherDataByStation.append(WeatherMeasurementsPerWeek(year: year, month: month, meanMaxTemperature: maxT, meanMinTemperature: minT, daysOfAirFrost: daysAR, totalRainfall: rainfall, totalSunshineDuration: sunshine))
-
-        }
-    }
 
     private func setupSearchController() {
-        // Do not hide when scroll
+        // Don't hide when scroll
         navigationItem.hidesSearchBarWhenScrolling = false
 
         // Set delegate
@@ -215,15 +155,13 @@ class HistoryTableVC: UITableViewController {
         var result = stationName.replacingOccurrences(of: " ", with: "")
         result = result.replacingOccurrences(of: "-", with: "")
 
-        return URL(string: stubURL + result.lowercased() + "data.txt")
+        return URL(string: Settings.stubURL + result.lowercased() + "data.txt")
     }
 
     private func doTableRefresh() {
-
-        // Change title when change weather station
-        self.navigationItem.title = currentWeatherStation + " Station"
-        // Do table refresh
-        self.tableView.reloadData()
+        // change title
+        navigationItem.title = Settings.currentStation + " Station"
+        tableView.reloadData()
     }
 }
 

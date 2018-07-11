@@ -14,11 +14,6 @@ class SettingsPageVC: UIViewController {
 
     var stations = ["Aberporth", "Armagh", "Ballypatrick", "Bradford", "Braemar", "Camborne", "Cambridge", "Cardiff", "Chivenor", "Cwmystwyth", "Dunstaffnage", "Durham", "Eastbourne", "Eskdalemuir", "Heathrow", "Hurn", "Lerwick", "Leuchars", "Lowestoft", "Manston", "Nairn", "Newton Rigg", "Oxford", "Paisley", "Ringway", "Ross-on-Wye", "Shawbury", "Sheffield", "Southampton", "Stornoway", "Sutton Bonington", "Tiree", "Valley", "Waddington", "Whitby", "Wick Airport", "Yeovilton"]
 
-    // MARK: Properties
-
-    var selectedStationIndex = 0
-    var selectedTemperatureScale = TemperatureScale.celsius
-
     // MARK: Outlets
 
     @IBOutlet weak var pickerView: UIPickerView!
@@ -28,24 +23,29 @@ class SettingsPageVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setupSettingView()
     }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-
-        // Setup setting view
-        pickerView.selectRow(selectedStationIndex, inComponent: 0, animated: true)
-        segmentedTempScale.selectedSegmentIndex = selectedTemperatureScale.rawValue
+    
+    // MARK: Private Method
+    
+    func setupSettingView() {
+        let stationIndex = stations.index(of: Settings.currentStation) ?? 0
+        
+        pickerView.selectRow(stationIndex, inComponent: 0, animated: true)
+        segmentedTempScale.selectedSegmentIndex = Settings.temperatureScale.rawValue
     }
 }
 
 extension SettingsPageVC: UIPickerViewDelegate, UIPickerViewDataSource {
-
-    // MARK: Picker View Delagate
-
+    
+    // MARK: Picker View DataSource
+    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
+
+    // MARK: Picker View Delagate
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return stations.count

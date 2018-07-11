@@ -13,13 +13,11 @@ class DetailAboutWeatherInfoVC: UIViewController {
     // MARK: Properties
 
     var weatherInformation: WeatherMeasurementsPerWeek?
-    var temperatureScale = TemperatureScale.celsius
-    var station = ""
 
     // MARK: Outlets
 
     @IBOutlet weak var stationNameLabel: UILabel!
-    @IBOutlet weak var yearLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var tMaxTextField: UITextField!
     @IBOutlet weak var tMinTextField: UITextField!
     @IBOutlet weak var daysAirFrostTextField: UITextField!
@@ -30,36 +28,43 @@ class DetailAboutWeatherInfoVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("viewDidLoad - Detail")
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-
-        stationNameLabel.text = station
+        print("viewWillAppear - Detail")
+        
+        stationNameLabel.text = Settings.currentStation
 
         if let data = weatherInformation {
-
-            yearLabel.text = "\(data.year), \(data.getMonthStringRepresentation)"
-
-            if let maxT = data.meanMaxTemperature {
-                tMaxTextField.text = data.getTemperatureValue(by: temperatureScale, value: maxT)
-            }
-
-            if let minT = data.meanMinTemperature {
-                tMinTextField.text = data.getTemperatureValue(by: temperatureScale, value: minT)
-            }
-
-            if let af = data.daysOfAirFrost {
-                daysAirFrostTextField.text = String(af)
-            }
-
-            if let rain = data.totalRainfall {
-                rainfallTextField.text = String(rain)
-            }
-
-            if let sun = data.totalSunshineDuration {
-                sunshineTextField.text = String(sun)
-            }
+            setupSettingView(data)
+        }
+    }
+    
+    // MARK: Private Method
+    
+    private func setupSettingView(_ data: WeatherMeasurementsPerWeek) {
+        dateLabel.text = "\(data.year), \(data.getMonthStringRepresentation)"
+        
+        if let maxT = data.meanMaxTemperature {
+            tMaxTextField.text = data.getTemperatureValue(by: Settings.temperatureScale, value: maxT)
+        }
+        
+        if let minT = data.meanMinTemperature {
+            tMinTextField.text = data.getTemperatureValue(by: Settings.temperatureScale, value: minT)
+        }
+        
+        if let af = data.daysOfAirFrost {
+            daysAirFrostTextField.text = String(af)
+        }
+        
+        if let rain = data.totalRainfall {
+            rainfallTextField.text = String(rain)
+        }
+        
+        if let sun = data.totalSunshineDuration {
+            sunshineTextField.text = String(sun)
         }
     }
 }
