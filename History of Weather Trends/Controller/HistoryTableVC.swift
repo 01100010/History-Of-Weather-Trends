@@ -24,8 +24,6 @@ class HistoryTableVC: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        //view.backgroundColor = UIColor.brown
-        
         loadWeatherStationData(station: Settings.currentStation)
 
         setupSearchController()
