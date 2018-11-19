@@ -1,19 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="2r9-vI-rOa">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="2r9-vI-rOa">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="AppleSDGothicNeo.ttc">
-            <string>AppleSDGothicNeo-Bold</string>
-        </array>
         <array key="Megan June.otf">
             <string>MeganJune</string>
         </array>
@@ -244,10 +240,10 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="dXh-Ph-P0J" userLabel="MinT Stack View">
-                                <rect key="frame" x="16" y="278.5" width="343" height="32.5"/>
+                                <rect key="frame" x="16" y="278.5" width="343" height="32"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tMin" translatesAutoresizingMaskIntoConstraints="NO" id="6nU-2x-tuo">
-                                        <rect key="frame" x="0.0" y="0.0" width="32" height="32.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="32" height="32"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="6nU-2x-tuo" secondAttribute="height" multiplier="1:1" id="R0j-M4-yuu"/>
                                         </constraints>
@@ -259,7 +255,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="---" borderStyle="roundedRect" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VQc-zS-IAp">
-                                        <rect key="frame" x="293" y="1.5" width="50" height="30"/>
+                                        <rect key="frame" x="293" y="1" width="50" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="mbV-3l-xmx"/>
                                         </constraints>
@@ -270,7 +266,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="9PM-mO-sod" userLabel="AFDays Stack View">
-                                <rect key="frame" x="16" y="319" width="343" height="32"/>
+                                <rect key="frame" x="16" y="318.5" width="343" height="32"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="afDays" translatesAutoresizingMaskIntoConstraints="NO" id="xrs-ep-Asc">
                                         <rect key="frame" x="0.0" y="0.0" width="32" height="32"/>
@@ -296,7 +292,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="fbH-S4-J7n" userLabel="Rainfall Stack View">
-                                <rect key="frame" x="16" y="359" width="343" height="32"/>
+                                <rect key="frame" x="16" y="358.5" width="343" height="32"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="totalRainfall" translatesAutoresizingMaskIntoConstraints="NO" id="Um7-UJ-UPD">
                                         <rect key="frame" x="0.0" y="0.0" width="32" height="32"/>
@@ -322,16 +318,16 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="pML-ed-7LW" userLabel="Sunshine Stack View">
-                                <rect key="frame" x="16" y="399" width="343" height="32"/>
+                                <rect key="frame" x="16" y="398.5" width="343" height="32"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="totalShine" translatesAutoresizingMaskIntoConstraints="NO" id="WOL-sz-j4C">
-                                        <rect key="frame" x="0.0" y="0.0" width="31.5" height="32"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="32" height="32"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="WOL-sz-j4C" secondAttribute="height" multiplier="1:1" id="7gJ-u9-zFQ"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total sunshine duration (hours): " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2vi-ca-jrF">
-                                        <rect key="frame" x="39.5" y="6" width="245.5" height="20.5"/>
+                                        <rect key="frame" x="40" y="6" width="245" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -424,16 +420,134 @@
             </objects>
             <point key="canvasLocation" x="159" y="185"/>
         </scene>
+        <!--TICKETS-->
+        <scene sceneID="6oV-uW-4wA">
+            <objects>
+                <viewController id="tKs-cV-m9m" customClass="TicketsCCViewController" customModule="History_of_Weather_Trends" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="u6O-Fn-EFa">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nhE-Dn-bLf">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="4fM-Wv-W1r"/>
+                                </constraints>
+                            </view>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iw1-0d-dXd">
+                                <rect key="frame" x="0.0" y="50" width="375" height="617"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yJB-vx-eFv" userLabel="Content View">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NqJ-fq-omx" userLabel="Center View">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="210"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="B9o-Ur-JVO" userLabel="Text Info Stack View">
+                                                        <rect key="frame" x="5" y="0.0" width="365" height="210"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TICKETS VALID FOR 6 MONTH FROM DATE OF PURCHASE" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="R0m-Kt-DNq" userLabel="Header Label">
+                                                                <rect key="frame" x="2.5" y="0.0" width="360.5" height="70"/>
+                                                                <fontDescription key="fontDescription" name="ProximaNova-Bold" family="Proxima Nova" pointSize="25"/>
+                                                                <color key="textColor" red="0.99989169840000003" green="1" blue="0.99988096950000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FREE SHUTTLE: FRONTIER - CABLE CAR + FREE FAST TRACK AT THE CABLE CAR TICKET OFFICE" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d9A-s4-tph" userLabel="First Sub Label">
+                                                                <rect key="frame" x="12" y="70" width="341" height="70"/>
+                                                                <fontDescription key="fontDescription" name="ProximaNova-Bold" family="Proxima Nova" pointSize="20"/>
+                                                                <color key="textColor" red="0.99989169840000003" green="1" blue="0.99988096950000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FOR FURTHER INFORMATION PLEASE APPROACH THE GIBRALTARINFO KIOSK DIRECTLY" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z0O-N2-1pq" userLabel="Second Sub Label">
+                                                                <rect key="frame" x="1" y="140" width="363" height="70"/>
+                                                                <fontDescription key="fontDescription" name="ProximaNova-Bold" family="Proxima Nova" pointSize="20"/>
+                                                                <color key="textColor" red="0.99989169840000003" green="1" blue="0.99988096950000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                                <color key="backgroundColor" red="0.79303121570000001" green="0.16726511720000001" blue="0.19703850149999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="trailing" secondItem="B9o-Ur-JVO" secondAttribute="trailing" constant="5" id="HYp-fH-5CW"/>
+                                                    <constraint firstItem="B9o-Ur-JVO" firstAttribute="leading" secondItem="NqJ-fq-omx" secondAttribute="leading" constant="5" id="Ntl-pQ-PCV"/>
+                                                    <constraint firstAttribute="bottom" secondItem="B9o-Ur-JVO" secondAttribute="bottom" id="WS9-f3-uDo"/>
+                                                    <constraint firstItem="B9o-Ur-JVO" firstAttribute="top" secondItem="NqJ-fq-omx" secondAttribute="top" id="e6l-pT-lk3"/>
+                                                </constraints>
+                                            </view>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yO2-FS-jRh">
+                                                <rect key="frame" x="-12.5" y="218" width="400" height="50"/>
+                                                <color key="backgroundColor" red="0.38342767950000001" green="0.65145528320000001" blue="0.38122951980000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="400" id="7Kq-Wf-Cug"/>
+                                                    <constraint firstAttribute="height" constant="50" id="wbv-3R-Txs"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="ProximaNova-Bold" family="Proxima Nova" pointSize="20"/>
+                                                <state key="normal" title="CABLE CAR &amp; NATURE RESERVE TICKETS">
+                                                    <color key="titleColor" red="0.99989169840000003" green="1" blue="0.99988096950000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="reserveTickets:" destination="tKs-cV-m9m" eventType="touchUpInside" id="hdN-iA-UoZ"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="yO2-FS-jRh" firstAttribute="centerX" secondItem="yJB-vx-eFv" secondAttribute="centerX" id="5dg-i8-3BK"/>
+                                            <constraint firstItem="NqJ-fq-omx" firstAttribute="leading" secondItem="yJB-vx-eFv" secondAttribute="leading" id="DaP-c5-TSZ"/>
+                                            <constraint firstItem="yO2-FS-jRh" firstAttribute="top" secondItem="NqJ-fq-omx" secondAttribute="bottom" constant="8" id="P9w-S0-QfI"/>
+                                            <constraint firstItem="NqJ-fq-omx" firstAttribute="top" secondItem="yJB-vx-eFv" secondAttribute="top" id="d52-9m-LCD"/>
+                                            <constraint firstAttribute="trailing" secondItem="NqJ-fq-omx" secondAttribute="trailing" id="fRO-nW-gdT"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="yJB-vx-eFv" secondAttribute="trailing" id="C9B-3t-hiS"/>
+                                    <constraint firstAttribute="bottom" secondItem="yJB-vx-eFv" secondAttribute="bottom" id="Cey-Np-RNZ"/>
+                                    <constraint firstItem="yJB-vx-eFv" firstAttribute="top" secondItem="iw1-0d-dXd" secondAttribute="top" id="K6v-5o-r5n"/>
+                                    <constraint firstItem="yJB-vx-eFv" firstAttribute="leading" secondItem="iw1-0d-dXd" secondAttribute="leading" id="vOL-zM-Tkz"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="nhE-Dn-bLf" secondAttribute="trailing" id="4Y8-Fs-2bR"/>
+                            <constraint firstItem="yJB-vx-eFv" firstAttribute="width" secondItem="u6O-Fn-EFa" secondAttribute="width" id="5tA-hq-3f8"/>
+                            <constraint firstItem="yJB-vx-eFv" firstAttribute="height" secondItem="u6O-Fn-EFa" secondAttribute="height" priority="250" id="9Yj-b3-grA"/>
+                            <constraint firstItem="nhE-Dn-bLf" firstAttribute="top" secondItem="u6O-Fn-EFa" secondAttribute="top" id="Rzy-I0-0uX"/>
+                            <constraint firstAttribute="trailing" secondItem="iw1-0d-dXd" secondAttribute="trailing" id="Skl-wc-g9g"/>
+                            <constraint firstItem="0JG-Sm-KuZ" firstAttribute="bottom" secondItem="iw1-0d-dXd" secondAttribute="bottom" id="orv-G9-H9I"/>
+                            <constraint firstItem="nhE-Dn-bLf" firstAttribute="leading" secondItem="u6O-Fn-EFa" secondAttribute="leading" id="uqW-9V-h82"/>
+                            <constraint firstItem="iw1-0d-dXd" firstAttribute="top" secondItem="nhE-Dn-bLf" secondAttribute="bottom" id="xdm-Zp-xLk"/>
+                            <constraint firstItem="iw1-0d-dXd" firstAttribute="leading" secondItem="u6O-Fn-EFa" secondAttribute="leading" id="zah-Ut-0wa"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="0JG-Sm-KuZ"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="TICKETS" id="d87-Hu-Ivf"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <connections>
+                        <outlet property="firstSubHeaderUILabel" destination="d9A-s4-tph" id="5Yy-zo-7fW"/>
+                        <outlet property="headerUILabel" destination="R0m-Kt-DNq" id="6Yc-4D-tBG"/>
+                        <outlet property="navBarPlaceholderView" destination="nhE-Dn-bLf" id="W30-OS-gFw"/>
+                        <outlet property="reserveTicketUIButton" destination="yO2-FS-jRh" id="DSZ-me-FTo"/>
+                        <outlet property="secondSubHeaderUILabel" destination="z0O-N2-1pq" id="5it-LF-Yud"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="97S-A9-IqM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1181.5592203898052" y="-1239.2"/>
+        </scene>
     </scenes>
     <resources>
-        <image name="MonthIcon" width="64" height="64"/>
-        <image name="Settings" width="32" height="32"/>
-        <image name="afDays" width="32" height="32"/>
-        <image name="station" width="64" height="64"/>
-        <image name="tMax" width="32" height="32"/>
-        <image name="tMin" width="32" height="32"/>
-        <image name="tempScale" width="64" height="64"/>
-        <image name="totalRainfall" width="32" height="32"/>
-        <image name="totalShine" width="32" height="32"/>
+        <image name="MonthIcon" width="400.69564819335938" height="400.69564819335938"/>
+        <image name="Settings" width="418.90908813476562" height="418.90908813476562"/>
+        <image name="afDays" width="384" height="384"/>
+        <image name="station" width="400.69564819335938" height="400.69564819335938"/>
+        <image name="tMax" width="384" height="384"/>
+        <image name="tMin" width="384" height="384"/>
+        <image name="tempScale" width="368.6400146484375" height="368.6400146484375"/>
+        <image name="totalRainfall" width="384" height="384"/>
+        <image name="totalShine" width="384" height="384"/>
     </resources>
 </document>
